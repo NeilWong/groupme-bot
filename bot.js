@@ -19,9 +19,6 @@ let currentUsers = []
  * Request handler function that parses request and posts message depending on parsed request text
  */
 function respond() {
-  break;
-  // var request = JSON.parse(this.req.chunks[0]),
-  //   botRegex = /^\/cool guy$/;
   let request = JSON.parse(this.req.chunks[0])
   let message = request.text;
 
