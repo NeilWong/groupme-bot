@@ -27,8 +27,9 @@ function respond() {
     postMessage(message, true);
     this.res.end();
   } else {
+    console.log('ignore message')
     this.res.writeHead(200);
-    postMessage(message, false)
+    //postMessage(message, false)
     this.res.end();
   }
 }

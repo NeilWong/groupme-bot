@@ -18,9 +18,6 @@ server = http.createServer(function (req, res) {
   req.on("data", function (chunk) {
     req.chunks.push(chunk.toString());
   });
-  req.on('error', (error) => {
-    console.log(error);
-  })
 
   router.dispatch(req, res, function (err) {
     res.writeHead(err.status, { "Content-Type": "text/plain" });
