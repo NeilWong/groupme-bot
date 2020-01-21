@@ -6,10 +6,20 @@ var botID = process.env.BOT_ID;
 
 // Process: receive message (respond) -> verify valid message (checkMessage) -> post correct message in response (postMessage)
 
+// Test Local Storage
+let user = { name: "", status: "in" }
+
+let inUsers = 0;
+let currentUsers = []
+
+
+// End Local Storage //
+
 /**
  * Request handler function that parses request and posts message depending on parsed request text
  */
 function respond() {
+  break;
   // var request = JSON.parse(this.req.chunks[0]),
   //   botRegex = /^\/cool guy$/;
   let request = JSON.parse(this.req.chunks[0])
@@ -79,7 +89,12 @@ function postMessage(message, success) {
   botReq.end(JSON.stringify(body));
 }
 
-
+/**
+ * Takes a message and success status and returns a response message based on those fields
+ * @param {String} message 
+ * @param {boolean} success 
+ * @returns {String} 
+ */
 const createMessage = (message, success) => {
   let botResponse;
 
@@ -110,5 +125,9 @@ const createMessage = (message, success) => {
 
   return botResponse;
 }
+
+// Start Helper Functions //
+
+// addInUser(user name)
 
 exports.respond = respond;

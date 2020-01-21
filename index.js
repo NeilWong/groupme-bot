@@ -30,7 +30,7 @@ server = http.createServer(function (req, res) {
   });
 });
 
-server.listen(port);
+//server.listen(port);
 console.log("app running on https://127.0.0.1:5000/");
 
 // Start Testing //
@@ -47,8 +47,8 @@ const options = {
 
 
 const req = http.request(options, res => {
-  console.log(`STATUS: ${res.statusCode}`);
-  console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+  // console.log(`STATUS: ${res.statusCode}`);
+  // console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
   res.setEncoding("utf8");
   res.on("data", chunk => {
     console.log(`BODY: ${chunk}`);
