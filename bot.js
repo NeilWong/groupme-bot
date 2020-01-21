@@ -37,6 +37,7 @@ const isValidMessage = (message) => {
 
 /**
  * Posts a message depending on success of request text
+ * @param {String} message
  * @param {boolean} success 
  */
 function postMessage(message, success) {
@@ -92,6 +93,7 @@ const createMessage = (message, success) => {
       break;
     case "/in":
       botResponse = "valid in"
+      break;
     case "/out":
       botResponse = "valid out"
       break;

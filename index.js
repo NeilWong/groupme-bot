@@ -35,7 +35,7 @@ console.log("app running on https://127.0.0.1:5000/");
 
 // Start Testing //
 
-let postObject = { text: "/cool guy" }
+let postObject = { text: "/in" }
 const postData = JSON.stringify(postObject)
 
 const options = {
