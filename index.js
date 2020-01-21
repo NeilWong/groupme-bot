@@ -5,7 +5,7 @@ director = require("director");
 cool = require("cool-ascii-faces");
 bot = require("./bot.js");
 
-const queryString = require("querystring");
+// const queryString = require("querystring");
 
 port = Number(process.env.PORT || 5000);
 router = new director.http.Router({
@@ -35,9 +35,8 @@ console.log("app running on https://127.0.0.1:5000/");
 
 // Start Testing //
 
-const postData = queryString.stringify({
-  msg: "/cool guy"
-});
+let postObject = { text: "/cool guy" }
+const postData = JSON.stringify(postObject)
 
 const options = {
   hostname: "127.0.0.1",
@@ -46,7 +45,6 @@ const options = {
   method: "POST"
 };
 
-console.log("moving to request");
 
 const req = http.request(options, res => {
   console.log(`STATUS: ${res.statusCode}`);

@@ -9,14 +9,14 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]),
     botRegex = /^\/cool guy$/;
 
-  console.log(`request: ${request}`)
+  console.log(request.text)
 
   if (request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
     postMessage();
     this.res.end();
   } else {
-    console.log("don't care");
+    console.log("Invalid request");
     this.res.writeHead(200);
     this.res.end();
   }
