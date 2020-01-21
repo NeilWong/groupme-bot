@@ -1,0 +1,7 @@
+/in - logs user in if there's space and responds with number of current users
+    - if request exceeds capacity responds with error message saying max user limit reached
+/out - signs out user if they're logged in and responds with number of current users
+    - if user not signed in responds with message telling user they are not signed in
+/status - responds with user logged in or out
+/users - responds with users currently logged in
+/limit - responds with max user capacity (2)
