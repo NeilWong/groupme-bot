@@ -13,14 +13,15 @@ function respond() {
   // var request = JSON.parse(this.req.chunks[0]),
   //   botRegex = /^\/cool guy$/;
   let request = JSON.parse(this.req.chunks[0])
+  let message = request.text;
 
-  if (request.text && isValidMessage(request.text)) {
+  if (request.text && isValidMessage(message)) {
     this.res.writeHead(200);
-    postMessage(true);
+    postMessage(message, true);
     this.res.end();
   } else {
     this.res.writeHead(200);
-    postMessage(false)
+    postMessage(message, false)
     this.res.end();
   }
 }
@@ -38,14 +39,14 @@ const isValidMessage = (message) => {
  * Posts a message depending on success of request text
  * @param {boolean} success 
  */
-function postMessage(success) {
+function postMessage(message, success) {
   //var botResponse, options, body, botReq;
 
   // if success === false -> post error message
   console.log(success);
 
   // botResponse will be determined by helper function parsing input and making relevant data accezs requests (user count, user name/login, etc)
-  let botResponse = cool();
+  let botResponse = createMessage(message, success);
 
   let options = {
     hostname: "api.groupme.com",
@@ -75,6 +76,37 @@ function postMessage(success) {
     console.log("timeout posting message " + JSON.stringify(err));
   });
   botReq.end(JSON.stringify(body));
+}
+
+
+const createMessage = (message, success) => {
+  let botResponse;
+
+  if (success === false) {
+    return "invalid message";
+  }
+
+  switch (message) {
+    case "/cool guy":
+      botResponse = "valid cool guy"
+      break;
+    case "/in":
+      botResponse = "valid in"
+    case "/out":
+      botResponse = "valid out"
+      break;
+    case "/status":
+      botResposne = "valid status"
+      break;
+    case "/users":
+      botResponse = "valid users"
+      break;
+    case "/limit":
+      botResponse = "valid limit"
+      break;
+  }
+
+  return botResponse;
 }
 
 exports.respond = respond;
