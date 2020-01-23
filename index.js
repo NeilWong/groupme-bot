@@ -28,39 +28,37 @@ server = http.createServer(function (req, res) {
 server.listen(port);
 console.log("app running on https://127.0.0.1:5000/");
 
-// // Start Testing //
+// Start Testing //
+/* COMMENT OUT WHEN PUSHING CODE*/
 
-// let postObject = { text: "/in" }
-// const postData = JSON.stringify(postObject)
+let postObject = { text: "/in" }
+const postData = JSON.stringify(postObject)
 
-// const options = {
-//   hostname: "127.0.0.1",
-//   port: 5000,
-//   path: "/",
-//   method: "POST"
-// };
+const options = {
+  hostname: "127.0.0.1",
+  port: 5000,
+  path: "/",
+  method: "POST"
+};
 
+const req = http.request(options, res => {
+  res.setEncoding("utf8");
+  res.on("data", chunk => {
+    console.log(`BODY: ${chunk}`);
+  });
+  res.on("end", () => {
+    console.log("No more data in response.");
+  });
+});
 
-// const req = http.request(options, res => {
-//   // console.log(`STATUS: ${res.statusCode}`);
-//   // console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
-//   res.setEncoding("utf8");
-//   res.on("data", chunk => {
-//     console.log(`BODY: ${chunk}`);
-//   });
-//   res.on("end", () => {
-//     console.log("No more data in response.");
-//   });
-// });
+req.on("error", e => {
+  console.error(`problem with request: ${e.message}`);
+});
 
-// req.on("error", e => {
-//   console.error(`problem with request: ${e.message}`);
-// });
+req.write(postData);
+req.end();
 
-// req.write(postData);
-// req.end();
-
-// // End testing //
+// End testing //
 
 function ping() {
   this.res.writeHead(200);
