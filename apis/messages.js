@@ -23,10 +23,10 @@ const getMessages = () => {
  * @param {String} message
  * @param {boolean} success 
  */
-const postMessage = (message, success) => {
+const postMessage = (fullMessage, message, success) => {
     let botResponse, options, body, botReq;
 
-    botResponse = createMessage(message, success);
+    botResponse = createMessage(fullMessage, success);
 
     options = {
         hostname: "api.groupme.com",
@@ -66,6 +66,7 @@ const postMessage = (message, success) => {
  * @returns {String} 
  */
 const createMessage = (message, success) => {
+    return message;
     let botResponse;
 
     if (success === false) {

@@ -6,7 +6,11 @@ cool = require("cool-ascii-faces");
 bot = require("./bot.js");
 
 port = Number(process.env.PORT || 5000);
+
+//routing table
 router = new director.http.Router({
+  // makes it so that post requests are handled by bot.respond
+  // get requests handled by ping function
   "/": {
     post: bot.respond,
     get: ping
@@ -19,7 +23,9 @@ server = http.createServer(function (req, res) {
     req.chunks.push(chunk.toString());
   });
 
+  // general dispatch that handled any requests sent to router
   router.dispatch(req, res, function (err) {
+    console.log("dispatch handled")
     res.writeHead(err.status, { "Content-Type": "text/plain" });
     res.end(err.message);
   });

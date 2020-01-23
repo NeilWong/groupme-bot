@@ -10,16 +10,24 @@ var botID = process.env.BOT_ID;
 /**
  * Request handler function that parses request and posts message depending on parsed request text
  */
+var count = 0
 function respond() {
-  console.log(this.req);
-
+  console.log(typeof this.req)
   let request = JSON.parse(this.req.chunks[0])
   let message = request.text;
+  let fullMessage = JSON.parse(this.req.chunks).text;
   let commands = constants.VALID_MESSAGES;
+
+  // if (request['name'] === "DSP-Bot" && count < 2) {
+  //   count += 1;
+  //   this.res.writeHead(200);
+  //   apis.postMessage("bot name is self", true);
+  //   this.res.end();
+  // }
 
   if (request.text && isValidMessage(message, commands)) {
     this.res.writeHead(200);
-    apis.postMessage(message, true);
+    apis.postMessage(fullMessage, message, true);
     this.res.end();
   } else {
     console.log('ignore message')
