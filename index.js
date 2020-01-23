@@ -28,6 +28,11 @@ server = http.createServer(function (req, res) {
 server.listen(port);
 console.log("app running on https://127.0.0.1:5000/");
 
+function ping() {
+  this.res.writeHead(200);
+  this.res.end("Hey, I'm DSP Bot!");
+}
+
 // Start Testing //
 /* COMMENT OUT WHEN PUSHING CODE*/
 
@@ -59,8 +64,3 @@ req.write(postData);
 req.end();
 
 // End testing //
-
-function ping() {
-  this.res.writeHead(200);
-  this.res.end("Hey, I'm DSP Bot!");
-}
