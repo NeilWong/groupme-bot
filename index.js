@@ -18,14 +18,14 @@ router = new director.http.Router({
   }
 });
 
-server = http.createServer(function (req, res) {
+server = http.createServer(function(req, res) {
   req.chunks = [];
-  req.on("data", function (chunk) {
+  req.on("data", function(chunk) {
     req.chunks.push(chunk.toString());
-  })
+  });
 
   // general dispatch that handled any requests sent to router
-  router.dispatch(req, res, function (err) {
+  router.dispatch(req, res, function(err) {
     res.writeHead(err.status, { "Content-Type": "text/plain" });
     res.end(err.message);
   });
@@ -42,37 +42,51 @@ function ping() {
 // Start Testing //
 // /* COMMENT OUT WHEN PUSHING CODE*/
 
-// let postObject = { text: "/in" }
-// const postData = JSON.stringify(postObject)
+let postObject = {
+  attachments: [],
+  avatar_url: "https://i.groupme.com/123456789",
+  created_at: 1302623328,
+  group_id: "1234567890",
+  id: "1234567890",
+  name: "John",
+  sender_id: "12345",
+  sender_type: "user",
+  source_guid: "GUID",
+  system: false,
+  text: "/in",
+  user_id: "1234567890"
+};
+
+const postData = JSON.stringify(postObject);
+
+const options = {
+  hostname: "127.0.0.1",
+  port: 5000,
+  path: "/",
+  method: "POST"
+};
 
 // const options = {
-//   hostname: "127.0.0.1",
-//   port: 5000,
+//   hostname: "https://gm-bot-dsp.herokuapp.com",
 //   path: "/",
 //   method: "POST"
-// };
+// }
 
-// // const options = {
-// //   hostname: "https://gm-bot-dsp.herokuapp.com",
-// //   path: "/",
-// //   method: "POST"
-// // }
+const req = http.request(options, res => {
+  res.setEncoding("utf8");
+  res.on("data", chunk => {
+    console.log(`BODY: ${chunk}`);
+  });
+  res.on("end", () => {
+    console.log("No more data in response.");
+  });
+});
 
-// const req = http.request(options, res => {
-//   res.setEncoding("utf8");
-//   res.on("data", chunk => {
-//     console.log(`BODY: ${chunk}`);
-//   });
-//   res.on("end", () => {
-//     console.log("No more data in response.");
-//   });
-// });
+req.on("error", e => {
+  console.error(`problem with request: ${e.message}`);
+});
 
-// req.on("error", e => {
-//   console.error(`problem with request: ${e.message}`);
-// });
-
-// req.write(postData);
-// req.end();
+req.write(postData);
+req.end();
 
 // // End testing //

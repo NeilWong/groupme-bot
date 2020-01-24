@@ -6,8 +6,11 @@ let apis = require("./apis/messages");
  */
 function respond() {
   // let request = JSON.parse(this.req.chunks[0])
-  let request = JSON.parse(this.req);
+  let request = JSON.parse(this.req.chunks);
   let message = request.name;
+  console.log(message);
+  let command = request.text;
+  console.log(command);
   let commands = constants.VALID_MESSAGES;
 
   // if (request['name'] === "DSP-Bot" && count < 2) {
@@ -17,7 +20,8 @@ function respond() {
   //   this.res.end();
   // }
   // request.text  && isValidMessage(message, commands)
-  if (request) {
+  //console.log(request.name && isValidCommand(command, commands));
+  if (request.name && isValidCommand(command, commands)) {
     this.res.writeHead(200);
     apis.postMessage(message, true);
     this.res.end();
@@ -33,8 +37,8 @@ function respond() {
  * @param {String} message
  * @returns {bool}
  */
-const isValidMessage = (message, commands) => {
-  return commands.includes(message);
+const isValidCommand = (command, commands) => {
+  return commands.includes(command);
 };
 
 // Start Helper Functions //
