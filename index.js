@@ -66,12 +66,6 @@ const options = {
   method: "POST"
 };
 
-// const options = {
-//   hostname: "https://gm-bot-dsp.herokuapp.com",
-//   path: "/",
-//   method: "POST"
-// }
-
 const req = http.request(options, res => {
   res.setEncoding("utf8");
   res.on("data", chunk => {

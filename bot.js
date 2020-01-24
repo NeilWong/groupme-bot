@@ -7,23 +7,17 @@ let apis = require("./apis/messages");
 function respond() {
   // let request = JSON.parse(this.req.chunks[0])
   let request = JSON.parse(this.req.chunks);
-  let message = request.name;
-  console.log(message);
+  let name = request.name;
   let command = request.text;
-  console.log(command);
   let commands = constants.VALID_MESSAGES;
 
-  // if (request['name'] === "DSP-Bot" && count < 2) {
-  //   count += 1;
-  //   this.res.writeHead(200);
-  //   apis.postMessage("bot name is self", true);
-  //   this.res.end();
-  // }
-  // request.text  && isValidMessage(message, commands)
+  console.log(request);
+
+  console.log(name, command, commands);
   //console.log(request.name && isValidCommand(command, commands));
-  if (request.name && isValidCommand(command, commands)) {
+  if (request.name !== "DSP-Bot" && isValidCommand(command, commands)) {
     this.res.writeHead(200);
-    apis.postMessage(message, true);
+    apis.postMessage(command, name);
     this.res.end();
   } else {
     console.log("ignore message");
