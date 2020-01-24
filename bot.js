@@ -1,8 +1,5 @@
-let http = require("http");
 let constants = require("./constants.js");
 let apis = require("./apis/messages");
-
-// Process: receive message (respond) -> verify valid message (checkMessage) -> post correct message in response (postMessage)
 
 /**
  * Request handler function that parses request and posts message depending on parsed request text
@@ -19,8 +16,8 @@ function respond() {
   //   apis.postMessage("bot name is self", true);
   //   this.res.end();
   // }
-
-  if (request.text && isValidMessage(message, commands)) {
+  // request.text  && isValidMessage(message, commands)
+  if (request) {
     this.res.writeHead(200);
     apis.postMessage(message, true);
     this.res.end();
