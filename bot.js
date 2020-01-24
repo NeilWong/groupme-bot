@@ -13,7 +13,10 @@ var botID = process.env.BOT_ID;
 var count = 0
 function respond() {
   let request = JSON.parse(this.req.chunks[0])
-  let message = request.text;
+  console.log(request);
+  console.log(request.name);
+  console.log(request.user_id);
+  let message = request.text + request.name + request.user_id;
   let commands = constants.VALID_MESSAGES;
 
   // if (request['name'] === "DSP-Bot" && count < 2) {
