@@ -1,22 +1,20 @@
-var HTTPS = require("https");
-var cool = require("cool-ascii-faces");
 let constants = require("./constants.js");
 let apis = require("./apis/messages")
-
-var botID = process.env.BOT_ID;
 
 // Process: receive message (respond) -> verify valid message (checkMessage) -> post correct message in response (postMessage)
 
 /**
  * Request handler function that parses request and posts message depending on parsed request text
  */
-var count = 0
 function respond() {
-  let request = JSON.parse(this.req.chunks[0])
-  console.log(request);
-  console.log(request.name);
-  console.log(request.user_id);
-  let message = request.text + request.name + request.user_id;
+  // let request = JSON.parse(this.req.chunks[0])
+  // let test = JSON.parse(this.req.chunks)
+  // console.log(request);
+  // console.log(test)
+  // console.log(test.name);
+  // console.log(test.user_id);
+  let request = JSON.parse(this.req);
+  let message = request.text //+ request.name + request.user_id;
   let commands = constants.VALID_MESSAGES;
 
   // if (request['name'] === "DSP-Bot" && count < 2) {

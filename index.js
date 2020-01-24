@@ -40,39 +40,39 @@ function ping() {
 }
 
 // Start Testing //
-/* COMMENT OUT WHEN PUSHING CODE*/
+// /* COMMENT OUT WHEN PUSHING CODE*/
 
-let postObject = { text: "/in" }
-const postData = JSON.stringify(postObject)
-
-const options = {
-  hostname: "127.0.0.1",
-  port: 5000,
-  path: "/",
-  method: "POST"
-};
+// let postObject = { text: "/in" }
+// const postData = JSON.stringify(postObject)
 
 // const options = {
-//   hostname: "https://gm-bot-dsp.herokuapp.com",
+//   hostname: "127.0.0.1",
+//   port: 5000,
 //   path: "/",
 //   method: "POST"
-// }
+// };
 
-const req = http.request(options, res => {
-  res.setEncoding("utf8");
-  res.on("data", chunk => {
-    console.log(`BODY: ${chunk}`);
-  });
-  res.on("end", () => {
-    console.log("No more data in response.");
-  });
-});
+// // const options = {
+// //   hostname: "https://gm-bot-dsp.herokuapp.com",
+// //   path: "/",
+// //   method: "POST"
+// // }
 
-req.on("error", e => {
-  console.error(`problem with request: ${e.message}`);
-});
+// const req = http.request(options, res => {
+//   res.setEncoding("utf8");
+//   res.on("data", chunk => {
+//     console.log(`BODY: ${chunk}`);
+//   });
+//   res.on("end", () => {
+//     console.log("No more data in response.");
+//   });
+// });
 
-req.write(postData);
-req.end();
+// req.on("error", e => {
+//   console.error(`problem with request: ${e.message}`);
+// });
 
-// End testing //
+// req.write(postData);
+// req.end();
+
+// // End testing //
