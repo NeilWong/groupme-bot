@@ -12,11 +12,8 @@ var botID = process.env.BOT_ID;
  */
 var count = 0
 function respond() {
-  console.log(this.req.name)
   let request = JSON.parse(this.req.chunks[0])
   let message = request.text;
-  let fullMessage = JSON.parse(this.req.chunks).text;
-  fullMessage = fullMessage + " awdaw" + this.req.name
   let commands = constants.VALID_MESSAGES;
 
   // if (request['name'] === "DSP-Bot" && count < 2) {
@@ -28,7 +25,7 @@ function respond() {
 
   if (request.text && isValidMessage(message, commands)) {
     this.res.writeHead(200);
-    apis.postMessage(fullMessage, message, true);
+    apis.postMessage(message, true);
     this.res.end();
   } else {
     console.log('ignore message')

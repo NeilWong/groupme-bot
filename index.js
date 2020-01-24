@@ -1,6 +1,7 @@
-var http, director, cool, bot, router, server, port;
+var http, director, bot, router, server, port;
 
 http = require("http");
+https = require("https");
 director = require("director");
 cool = require("cool-ascii-faces");
 bot = require("./bot.js");
@@ -21,11 +22,10 @@ server = http.createServer(function (req, res) {
   req.chunks = [];
   req.on("data", function (chunk) {
     req.chunks.push(chunk.toString());
-  });
+  })
 
   // general dispatch that handled any requests sent to router
   router.dispatch(req, res, function (err) {
-    console.log("dispatch handled")
     res.writeHead(err.status, { "Content-Type": "text/plain" });
     res.end(err.message);
   });
@@ -51,6 +51,12 @@ const options = {
   path: "/",
   method: "POST"
 };
+
+// const options = {
+//   hostname: "https://gm-bot-dsp.herokuapp.com",
+//   path: "/",
+//   method: "POST"
+// }
 
 const req = http.request(options, res => {
   res.setEncoding("utf8");

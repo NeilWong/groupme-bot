@@ -1,32 +1,45 @@
 var HTTPS = require("https");
 let botID = process.env.BOT_ID;
+let groupId = process.env.GROUP_ID;
 
 const getMessages = () => {
     let options = {
         hostname: "api.groupme.com",
-        path: "groups/",
-        method: "POST"
+        path: `/v3/groups/:${groupId}/messages`,
+        method: "GET"
+    }
+
+    body = {
+        bot_id: botID
     }
 
     let botReq = HTTPS.request(options, function (res) {
-        if (res.statusCode == 202) {
+        if (res.statusCode == 200) {
             //neat
         } else {
             console.log("rejecting bad status code " + res.statusCode);
         }
     })
 
+    botReq.on("error", function (err) {
+        console.log("error retrieving messages " + JSON.stringify(err))
+    })
 
+    botReq.on("timeout", function (err) {
+        console.log("timeout getting messages " + JSON.stringify(err))
+    })
+
+    botReq.end(JSON.stringify(body))
 }
 /**
  * Posts a message depending on success of request text
  * @param {String} message
  * @param {boolean} success 
  */
-const postMessage = (fullMessage, message, success) => {
+const postMessage = (message, success) => {
     let botResponse, options, body, botReq;
 
-    botResponse = createMessage(fullMessage, success);
+    botResponse = createMessage(message, success);
 
     options = {
         hostname: "api.groupme.com",
@@ -104,5 +117,6 @@ const createMessage = (message, success) => {
 /* Start Exports */
 
 exports.postMessage = postMessage;
+exports.getMessages = getMessages;
 
 /* End Exports */
